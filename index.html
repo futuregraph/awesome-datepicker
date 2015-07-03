@@ -33,8 +33,8 @@
                 <div class="demo-rules">
                     <h2>Условия для демо </h2>
                     <p class="rules-text" data-ng-class="{default : d.datepickerHovered == 'a'}">
-                        Есть 4 даты: A, B, C и D.
-                        Даты в календарях должны удовлетворять следующим условиям:
+Есть 4 даты: A, B, C и D.
+Даты в календарях должны удовлетворять следующим условиям:
 
 	<span data-ng-class="{highlight: d.datepickerHovered == 'b'}">B &gt;= A
 	B &lt;= A+10</span>
@@ -43,7 +43,7 @@
 	<span data-ng-class="{highlight: d.datepickerHovered == 'd'}">D &gt;= A-5
 	D &lt;= C+5</span>
 
-                        Недоступный период для A,B,C: с 12 по 14 число включительно. B и C должны находиться в одном активном периоде, который определяется в A (либо до недоступного периода, либо после).</p>
+Недоступный период для A,B,C: с 12 по 14 число включительно. B и C должны находиться в одном активном периоде, который определяется в A (либо до недоступного периода, либо после).</p>
                     <button class="btn" data-ng-click="d.removeBlock()" data-ng-show="d.isBlockAppear">
                         Удалить недоступный период
                     </button>

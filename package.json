@@ -1,14 +1,30 @@
 {
   "name": "awesome-datepicker",
   "version": "1.0.0",
-  "description": "",
+  "description": "Smart datepicker for AngularJS",
   "main": "index.js",
-  "author": "",
-  "license": "ISC",
+  "author":  {
+    "name": "Vitaly Gridnev",
+    "email": "whereisthew@gmail.com",
+    "url": "https://vk.com/whereisthew"
+  },
+  "license": "GPL v3",
   "dependencies": {
     "angular": "^1.4.1",
     "jquery": "^2.1.4",
     "lodash": "^3.10.0",
     "moment": "^2.10.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/whereisthew/awesome-datepicker.git"
+  },
+  "keywords": [
+    "date",
+    "time",
+    "picker",
+    "input",
+    "angular",
+    "angularjs"
+  ]
 }

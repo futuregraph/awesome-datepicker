@@ -274,3 +274,32 @@ textarea.t-input {
   margin: 0 0 0 -20px;
   padding-right: 8px;
 }
+
+
+.helper {
+  position: relative;
+}
+.helper-block {
+  position: absolute;
+  z-index: 99;
+  left: 0;
+  bottom: 100%;
+  padding: 7px 14px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  white-space: nowrap;
+  line-height: 16px;
+  color: #fff;
+  background: rgba(0,0,0,0.95);
+  border-radius: 2px;
+}
+.helper-block__datepicker {
+  margin-left: -9px
+}
+.helper-block-tail {
+  position: absolute;
+  left: 15px;
+  top: 100%;
+  border: 10px solid transparent;
+  border-top-color: rgba(0, 0, 0, 0.95);
+}

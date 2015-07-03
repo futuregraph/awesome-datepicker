@@ -1,0 +1,14 @@
+{
+  "name": "awesome-datepicker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.4.1",
+    "jquery": "^2.1.4",
+    "lodash": "^3.10.0",
+    "moment": "^2.10.3"
+  }
+}

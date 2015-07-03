@@ -73,12 +73,12 @@
             <p>Можно использовать его напрямую (например, для каких-то особых ограничений, которые должны учитываться для всех календарей).</p>
 
             <code>var date = moment(new Date()),
-                range = RangesService.createRange(
-                date.clone(),
-                date.clone().add('day',180),
-                'ограничение по длине больничного',
-                'не больше 180 дней'
-                )</code>
+    range = RangesService.createRange(
+    date.clone(),
+    date.clone().add('day',180),
+    'ограничение по длине больничного',
+    'не больше 180 дней'
+    )</code>
             <br/>
             <p>Но для ясности лучше использовать обёртки. Пока что их две:</p>
             <p></p>
@@ -96,39 +96,39 @@
             <p>Пример ограничения из данного демо для дэйтпикера А:</p>
             <code>var dateA = 'd.dateA',  // биндинг дэйтпикера, для удобства работы
 
-                // создаем ограничивающий период для дэйтпикера А
-                blockedA = RangesService.createDependentRange(
-                dateA,
-                'заблокировано, разрыв в периодах'
-                );
+    // создаем ограничивающий период для дэйтпикера А
+    blockedA = RangesService.createDependentRange(
+    dateA,
+    'заблокировано, разрыв в периодах'
+    );
 
-                // блокируем с 12 по 14 число текущего месяца
-                blockedA.from = TODAY.clone().set('date',12).startOf('day');
-                blockedA.to = TODAY.clone().set('date',14).startOf('day');</code>
+    // блокируем с 12 по 14 число текущего месяца
+    blockedA.from = TODAY.clone().set('date',12).startOf('day');
+    blockedA.to = TODAY.clone().set('date',14).startOf('day');</code>
         </div>
         <div class="flex-item">
             <h2>Свойства и методы периода </h2>
             createRange(from, to, type, message) возвращает вот такой объект:
-            <code>{
-                from: from,
-                to: to,
-                type: type,
-                message: message,
-                isEnabled: enabled,
-                enable: function(){
-                this.isEnabled = true;
-                },
-                expects: [],
-                expect: function (datepicker) {
-                this.expects.push( datepicker )
-                },
-                disable: function(){
-                this.isEnabled = false;
-                },
-                remove: function () {
-                removeRange( this )
-                }
-                }</code>
+<code>{
+    from: from,
+    to: to,
+    type: type,
+    message: message,
+    isEnabled: enabled,
+    enable: function(){
+        this.isEnabled = true;
+    },
+    expects: [],
+    expect: function (datepicker) {
+        this.expects.push( datepicker )
+    },
+    disable: function(){
+        this.isEnabled = false;
+    },
+    remove: function () {
+        removeRange( this )
+    }
+}</code>
             <br/>
             Теперь по порядку:
             <div class="range-props">

@@ -4,12 +4,15 @@
      * @author Vitaly Gridnev
      */
 
-    app.service('$RangesService', ['$rootScope', '$timeout', function ($rootScope, $timeout) {
-        return new RangesCtrl($rootScope, $timeout)
-    } ] );
+    app.service('$RangesService', getService );
+
+    function getService( $rootScope ){
+        return new RangesService($rootScope )
+    }
+    getService.$inject = ['$rootScope'];
 
     var DATE_FORMAT = 'D.M.YYYY', // moment.js date format
-        RangesCtrl = function ($scope, $timeout) {
+        RangesService = function ($scope) {
 
             var RANGES = [],
                 DATEPICKERS = [],

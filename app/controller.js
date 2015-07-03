@@ -12,10 +12,7 @@
             MOMENT_DATEFORMAT = 'D.M.YYYY',
             TODAY = moment();
 
-        vm.dateA = TODAY.clone().format(MOMENT_DATEFORMAT);
-        vm.dateB = TODAY.clone().format(MOMENT_DATEFORMAT);
-        vm.dateC = TODAY.clone().format(MOMENT_DATEFORMAT);
-        vm.dateD = TODAY.clone().format(MOMENT_DATEFORMAT);
+        vm.dateA = vm.dateB = vm.dateC = vm.dateD = TODAY.clone().format(MOMENT_DATEFORMAT);
 
         RangesService.flush();
 

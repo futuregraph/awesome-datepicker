@@ -23,14 +23,14 @@
             dateD = 'd.dateD',
 
         // зависимые периоды
-        Bdependence1 = RangesService.createDependentRange( dateB, 'не раньше A' ),
-        Bdependence2 = RangesService.createDependentRange( dateB, 'не позже A+10' ),
+        Bdep1 = RangesService.createDependentRange( dateB, 'не раньше A' ),
+        Bdep2 = RangesService.createDependentRange( dateB, 'не позже A+10' ),
 
-        Cdependence1 = RangesService.createDependentRange( dateC, 'не раньше B' ),
-        Cdependence2 = RangesService.createDependentRange( dateC, 'не позже A+15' ),
+        Cdep1 = RangesService.createDependentRange( dateC, 'не раньше B' ),
+        Cdep2 = RangesService.createDependentRange( dateC, 'не позже A+15' ),
 
-        Ddependence1 = RangesService.createDependentRange( dateD, 'не раньше А-5' ),
-        Ddependence2 = RangesService.createDependentRange( dateD, 'не позже C+5' ),
+        Ddep1 = RangesService.createDependentRange( dateD, 'не раньше А-5' ),
+        Ddep2 = RangesService.createDependentRange( dateD, 'не позже C+5' ),
 
         // на первом блокируем с 12 по 14 число текущего месяца
         blockedA = RangesService.createDependentRange(  dateA, 'заблокировано, разрыв в периодах' ),
@@ -105,8 +105,8 @@
 
             var _d = moment( vm.dateA, MOMENT_DATEFORMAT );
 
-            Bdependence1.to = _d.clone().subtract( 1, 'days');
-            Bdependence2.from = _d.clone().add( 11, 'days' )
+            Bdep1.to = _d.clone().subtract( 1, 'days');
+            Bdep2.from = _d.clone().add( 11, 'days' )
 
         }
 
@@ -118,8 +118,8 @@
             var _d1 = moment( vm.dateA, MOMENT_DATEFORMAT ),
                 _d2 = moment( vm.dateB, MOMENT_DATEFORMAT );
 
-            Cdependence1.to = _d2.clone()
-            Cdependence2.from = _d1.clone().add( 16, 'days' )
+            Cdep1.to = _d2.clone()
+            Cdep2.from = _d1.clone().add( 16, 'days' )
         }
 
         /**
@@ -130,8 +130,8 @@
             var _d1 = moment( vm.dateA, MOMENT_DATEFORMAT ),
                 _d2 = moment( vm.dateC, MOMENT_DATEFORMAT );
 
-            Ddependence1.to = _d1.clone().subtract( 6, 'days' )
-            Ddependence2.from = _d2.clone().add( 6, 'days' )
+            Ddep1.to = _d1.clone().subtract( 6, 'days' )
+            Ddep2.from = _d2.clone().add( 6, 'days' )
 
         }
 
@@ -143,8 +143,8 @@
          */
         vm.removeBlock = function () {
             blockedA.disable();
-            ADeps();
             vm.isBlockAppear = !1;
+            ADeps()
         }
 
         /**
@@ -152,8 +152,8 @@
          */
         vm.addBlock = function () {
             blockedA.enable();
-            ADeps();
             vm.isBlockAppear = !0;
+            ADeps()
         }
 
 

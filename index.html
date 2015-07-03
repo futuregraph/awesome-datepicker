@@ -1,44 +1,176 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Awesome-datepicker by whereisthew</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>awesome-datepicker</title>
+    <link rel="stylesheet" href="/app/awesomeDatepicker/css/datepicker.css"/>
+    <link rel="stylesheet" href="/app/css/other.css"/>
+</head>
+<body>
+<div>
+    <div data-ng-app="demoApp">
+        <div data-ng-controller="dateCtrl as d" class="flex-container">
+            <div class="flex-item">
+                <h1>awesome-datepicker</h1>
+                <div class="datepicker-wrap">
+                    <p class="number">A</p>
+                    <awesome-datepicker m-date="d.dateA"></awesome-datepicker>
+                </div>
+                <div class="datepicker-wrap">
+                    <p class="number">B</p>
+                    <awesome-datepicker m-date="d.dateB"></awesome-datepicker>
+                </div>
+                <div class="datepicker-wrap">
+                    <p class="number">C</p>
+                    <awesome-datepicker m-date="d.dateC"></awesome-datepicker>
+                </div>
+                <div class="datepicker-wrap">
+                    <p class="number">D</p>
+                    <awesome-datepicker m-date="d.dateD"></awesome-datepicker>
+                </div>
+            </div>
+            <div class="flex-item">
+                <div class="demo-rules">
+                    <h2>Условия для демо </h2>
+                    <p class="rules-text" data-ng-class="{default : d.datepickerHovered == 'a'}">
+                        Есть 4 даты: A, B, C и D.
+                        Даты в календарях должны удовлетворять следующим условиям:
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-light.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>Awesome-datepicker</h1>
-        <p>Smart AngularJS datepicker</p>
+	<span data-ng-class="{highlight: d.datepickerHovered == 'b'}">B &gt;= A
+	B &lt;= A+10</span>
+	<span data-ng-class="{highlight: d.datepickerHovered == 'c'}">C &gt; B
+	C &lt;= A+15</span>
+	<span data-ng-class="{highlight: d.datepickerHovered == 'd'}">D &gt;= A-5
+	D &lt;= C+5</span>
 
-        <p class="view"><a href="https://github.com/whereisthew/awesome-datepicker">View the Project on GitHub <small>whereisthew/awesome-datepicker</small></a></p>
+                        Недоступный период для A,B,C: с 12 по 14 число включительно. B и C должны находиться в одном активном периоде, который определяется в A (либо до недоступного периода, либо после).</p>
+                    <button class="btn" data-ng-click="d.removeBlock()" data-ng-show="d.isBlockAppear">
+                        Удалить недоступный период
+                    </button>
+                    <button class="btn" data-ng-click="d.addBlock()" data-ng-show="!d.isBlockAppear">
+                        Добавить недоступный период
+                    </button>
 
-
-        <ul>
-          <li><a href="https://github.com/whereisthew/awesome-datepicker/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/whereisthew/awesome-datepicker/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/whereisthew/awesome-datepicker">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h1>
-<a id="awesome-datepicker" class="anchor" href="#awesome-datepicker" aria-hidden="true"><span class="octicon octicon-link"></span></a>awesome-datepicker</h1>
-
-<p>Smart AngularJS datepicker</p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/whereisthew">whereisthew</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
+                    <p style="margin-left: 161px; line-height: 1.3; padding: 9px; width: 164px; border: 1px dashed rgb(170, 170, 170); color: rgb(153, 153, 153); border-radius: 6px; font-size: 12px; margin-top: -288px;">
+                        причину недоступности той или иной даты можно узнать, кликнув по ней
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
-  </body>
+
+    <div class="flex-container">
+        <div class="flex-item">
+            <h1>Was ist das</h1>
+            <p> При создании нового функционала со сложными зависимостями в календарях раньше приходилось вести работу с периодами вручную, что давало на выходе огромные куски лапша-кода.
+                Код был неочевиден, имел высокую степень дублирования и требовал большой внимательности при разработке.</p>
+            <p> Для того, чтобы избавиться от подобных проблем, было решено перевести всю работу с периодами в отдельный сервис (<a href="http://habrahabr.ru/post/190342/">http://habrahabr.ru/post/190342/</a>), который бы давал понятное API и инкапсулировал в себе всю работу с периодами (пересечения, условия для конкретных календарей и т.п.)
+                Также нужно было создать ясную абстракцию "период", с чёткими и однозначными свойствами.</p>
+
+            <h2>Создание периода</h2>
+            <p>Это просто :) &ndash; у RangesService есть метод createRange(), который возвращает экземпляр периода.
+                С ним можно удобно работать в любом месте кода.</p>
+            <p>Можно использовать его напрямую (например, для каких-то особых ограничений, которые должны учитываться для всех календарей).</p>
+
+            <code>var date = moment(new Date()),
+                range = RangesService.createRange(
+                date.clone(),
+                date.clone().add('day',180),
+                'ограничение по длине больничного',
+                'не больше 180 дней'
+                )</code>
+            <br/>
+            <p>Но для ясности лучше использовать обёртки. Пока что их две:</p>
+            <p></p>
+            <h3>createBackendRange(&lt;элемент массива с бэкэнда&gt;)</h3>
+            <p>Используется для добавления периодов, пришедших с бэкэнда, не проводя преобразований. Принимается стандартный формат элемента массива с бэкэнда. Периоду устанавливается тип "backend".</p>
+            <p>При обновлении периодов c бэкэнда можно вызвать метод flush(&lt;тип периода&gt;) и передать туда тип "backend", дабы удалить устаревшие ограничения. Например:</p>
+
+            <code>RangesService.flush('backend');   // сбрасываем старые ограничения
+                angular.forEach( _exPeriods.DatesExcluded, function (period) {
+                var range = RangesService.createBackendRange( period ) // создаём и добавляем в сервис новые
+                } )</code>
+
+            <h3>createDependentRange(datepicker, message)</h3>
+            <p>Используется для добавления ограничивающих периодов для конкретного дэйтпикера. Первым параметром передаётся название переменной из $scope или this, на которую забинден дэйтпикер.</p>
+            <p>Пример ограничения из данного демо для дэйтпикера А:</p>
+            <code>var dateA = 'd.dateA',  // биндинг дэйтпикера, для удобства работы
+
+                // создаем ограничивающий период для дэйтпикера А
+                blockedA = RangesService.createDependentRange(
+                dateA,
+                'заблокировано, разрыв в периодах'
+                );
+
+                // блокируем с 12 по 14 число текущего месяца
+                blockedA.from = TODAY.clone().set('date',12).startOf('day');
+                blockedA.to = TODAY.clone().set('date',14).startOf('day');</code>
+        </div>
+        <div class="flex-item">
+            <h2>Свойства и методы периода </h2>
+            createRange(from, to, type, message) возвращает вот такой объект:
+            <code>{
+                from: from,
+                to: to,
+                type: type,
+                message: message,
+                isEnabled: enabled,
+                enable: function(){
+                this.isEnabled = true;
+                },
+                expects: [],
+                expect: function (datepicker) {
+                this.expects.push( datepicker )
+                },
+                disable: function(){
+                this.isEnabled = false;
+                },
+                remove: function () {
+                removeRange( this )
+                }
+                }</code>
+            <br/>
+            Теперь по порядку:
+            <div class="range-props">
+                <p><b>from</b> &ndash; дата начала периода, должна быть объектом MomentJS</p>
+                <p><b>to</b> &ndash; дата конца периода, должна быть объектом MomentJS</p>
+                <p><b>type</b> &ndash; тип периода ('backend', 'datepicker_d.dateA', etc.)</p>
+                <p><b>message</b> &ndash; сообщение, объясняющее причину блокировки</p>
+                <p><b>isEnabled</b> &ndash; нужно ли учитывать период</p>
+                <p><b>enable()</b> &ndash; включает период</p>
+                <p><b>disable()</b> &ndash; выключает период</p>
+                <p><b>expects</b> &ndash; массив с исключенными для данного периода дэйтпикерами</p>
+                <p><b>expect()</b> &ndash; добавляет в массив исключенных какой-либо дэйтпикер</p>
+                <p><b>remove()</b> &ndash; удаляет период из сервиса</p>
+            </div>
+
+            <p>Остальную информацию и примеры использования можно посмотреть в коде данного демо</p>
+        </div>
+    </div>
+</div>
+
+<script src="/node_modules/moment/moment.js"></script>
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/node_modules/lodash/index.js"></script>
+
+<script src="/node_modules/angular/angular.min.js"></script>
+<script src="/app/app.js"></script>
+<script src="/app/awesomeDatepicker/js/app.js"></script>
+<script src="/app/awesomeDatepicker/js/controller.js"></script>
+<script src="/app/awesomeDatepicker/js/filters.js"></script>
+<script src="/app/awesomeDatepicker/js/directive.js"></script>
+<script src="/app/awesomeDatepicker/js/service.js"></script>
+
+<link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/default.min.css">
+<link rel="stylesheet" title="Solarized - Light" href="http://highlightjs.org/static/styles/solarized_light.css">
+<script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+<script>
+    hljs.configure( {tabReplace: '    '} );
+    hljs.initHighlightingOnLoad();
+    $(document).ready(function(){
+        $( 'code' ).each( function (i, e) {hljs.highlightBlock( e )} );
+    })
+</script>
+
+</body>
 </html>

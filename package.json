@@ -26,5 +26,9 @@
     "input",
     "angular",
     "angularjs"
-  ]
+  ],
+  "dependencies": {
+    "gulp": "*",
+    "gulp-watch": "*"
+  }
 }

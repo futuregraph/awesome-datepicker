@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Smart datepicker for AngularJS",
   "main": "index.js",
-  "author":  {
+  "author": {
     "name": "Vitaly Gridnev",
     "email": "whereisthew@gmail.com",
     "url": "https://vk.com/whereisthew"
@@ -27,8 +27,11 @@
     "angular",
     "angularjs"
   ],
-  "dependencies": {
+  "devDependencies": {
+    "node-libs-browser": "^0.5.2",
+    "webpack": "^1.10.1",
     "gulp": "*",
-    "gulp-watch": "*"
+    "gulp-watch": "*",
+    "gulp-less": "*"
   }
 }
